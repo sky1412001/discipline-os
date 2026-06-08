@@ -1,0 +1,20 @@
+module.exports = {
+	version: 2,
+	builds: [
+		{
+			src: "package.json",
+			use: "@vercel/static-build",
+			config: {
+				distDir: "dist/client",
+			},
+		},
+		{
+			src: "api/index.ts",
+			use: "@vercel/node",
+		},
+	],
+	routes: [
+		{ handle: "filesystem" },
+		{ src: "/(.*)", dest: "/api/index.ts" },
+	],
+};
